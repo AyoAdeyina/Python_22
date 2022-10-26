@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}   
+        {% if messages %}                            
+            {% for message in messages %}            
+                <p>{{message}}</p>                   
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- add value to each section -->
+    <form action="/recipes/update" method="POST">
+        <input type="hidden" name="id" value="{{ this_recipe.id }}">
+        <!-- <input type="hidden" name="user_id" value="{{ session.user_id }}"> -->
+        <label>
+            Name:   
+            <input type="text" name="name" value="{{ this_recipe.name }}"> 
+        </label>
+        <label>
+            Description: 
+        </label>
+        <textarea name="description"  cols="30" rows="10"> {{ this_recipe.description }} </textarea>
+        <label>
+            Instructions:
+        </label>
+        <textarea name="instruction" cols="30" rows="10"> {{ this_recipe.instruction }} </textarea>
+        <label>
+            Date Made On:
+            <input type="date" name="date" value="{{ this_recipe.date }}">
+        </label>
+        <label>
+            Under 30 Minutes?
+            {% if this_recipe.under_30_minutes == "Y" %}
+            <label>
+                Yes
+                <input type="radio" name="under_30_minutes" value="Y" checked>
+            </label>
+            <label>
+                No
+                <input type="radio" name="under_30_minutes" value="N">
+            </label>
+            {% else %}
+            <label>
+                Yes
+                <input type="radio" name="under_30_minutes" value="Y">
+            </label>
+            <label>
+                No
+                <input type="radio" name="under_30_minutes" value="N" checked>
+            </label>
+            {% endif %}
+        </label>
+        <input type="submit" value="Update Recipe">
+    </form>
+    <a href="/users/logout">
+        <button>Logout</button>
+    </a>
+    <a href="/users/profile">
+        <button>Dashboard</button>
+    </a>
+</body>
+</html>

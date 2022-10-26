@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Create Recipe</title>
+</head>
+<body>
+    <h2>Add New Recipe</h2>
+
+    {% with messages = get_flashed_messages() %}   
+        {% if messages %}                            
+            {% for message in messages %}            
+                <p>{{message}}</p>                   
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/recipes/create" method="POST">
+        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+        <label>
+            Name:
+            <input type="text" name="name">
+        </label>
+        <label>
+            Description: 
+        </label>
+        <textarea name="description"  cols="30" rows="10"></textarea>
+        <label>
+            Instructions:
+        </label>
+        <textarea name="instruction" cols="30" rows="10"></textarea>
+        <label>
+            Date Made On:
+            <input type="date" name="date">
+        </label>
+        <label>
+            Under 30 Minutes?
+            <label>
+                Yes
+                <input type="radio" name="under_30_minutes" value="Y">
+            </label>
+            <label>
+                No
+                <input type="radio" name="under_30_minutes" value="N">
+            </label>
+        </label>
+        <input type="submit" value="Create Recipe">
+    </form>
+
+    <a href="/users/logout">
+        <button>Logout</button>
+    </a>
+    <a href='/users/profile'>
+        <button>Dashboard</button>
+    </a>
+</body>
+</html>

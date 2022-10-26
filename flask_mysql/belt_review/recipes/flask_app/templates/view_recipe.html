@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Show</title>
+</head>
+<body>
+    <h2>Welcome {{ this_user.first_name }} {{ this_user.last_name }}!</h2>
+    <form action= "/recipes/show/{{ show_recipe.id }}">
+        <h3>{{ show_recipe.name }}</h3>
+        <p>
+            Description: {{ show_recipe.description }}
+        </p>
+        <p>
+            Under 30 Minutes: {{ show_recipe.under_30_minutes }}
+        </p>
+        <p>
+            Instructions: {{ show_recipe.instruction }}
+        </p>
+        <p>
+            Date Made: {{ show_recipe.date }}
+        </p>
+    </form>
+    <a href="/users/logout">
+        <button>Logout</button>
+    </a>
+    <a href='/users/profile'>
+        <button>Dashboard</button>
+    </a>
+</body>
+</html>
